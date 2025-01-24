@@ -5,7 +5,7 @@ type Tbutton = {
 
 const CustomButton = ({ btnText }: Tbutton) => {
       return (
-            <button className="border border-brandTextPrimary flex justify-center items-center gap-1 px-8 py-3">
+            <button className="border border-brandTextTertiary flex justify-center items-center gap-1 px-8 py-3 rounded-md text-[#173F5F] text-sm tracking-[3px] hover:bg-brandTextTertiary hover:text-white transition delay-75">
                   {btnText}
                   <IoIosArrowRoundForward />
             </button>

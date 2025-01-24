@@ -52,7 +52,7 @@ export default {
 				},
 				brandPrimary: "#faefef",
 				brandSecondary: "#f6f6f6",
-				brandTextPrimary: "#393280",
+				brandTextPrimary: "#173F5F",
 				brandTextSecondary: "#393280CC",
 				brandTextTertiary: "#38426C",
 				brandSelect:"#ED553B"

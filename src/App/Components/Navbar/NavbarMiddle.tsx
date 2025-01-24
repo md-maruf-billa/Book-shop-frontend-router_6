@@ -8,7 +8,7 @@ import { IoIosLogIn } from "react-icons/io";
 
 const NavbarMiddle = () => {
       return (
-            <div className='flex items-center justify-between py-2'>
+            <div className='flex items-center justify-between py-2 px-10'>
                   {/* nav start */}
                   <div>
                         <img className='w-3/4' src={logo} alt="" />
@@ -30,7 +30,7 @@ const NavbarMiddle = () => {
                               <CiHeart />
                               WISHLIST
                         </Button>
-                        <Button className='bg-brandSelect hover:bg-brandSelect/70 text-white text-base'>
+                        <Button className='bg-brandTextTertiary hover:bg-brandTextTertiary/70 text-white text-base'>
                               <IoIosLogIn />
                               Login
                         </Button>
