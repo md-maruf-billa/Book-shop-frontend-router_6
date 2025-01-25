@@ -69,6 +69,9 @@
 .backround-liner{
   background: linear-gradient(94deg, #FCECEC 1.85%, #ffffff 64.13%);
 }
+.footer-background{
+  background: linear-gradient(90deg, rgba(255, 229, 229, 0.52) 0%, rgba(245, 255, 254, 0.52) 13.33%, rgba(252, 243, 255, 0.52) 54.58%, rgba(255, 244, 229, 0.52) 99.86%);
+}
 
 a.active {
   color: #ED553B;
