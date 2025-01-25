@@ -1,4 +1,5 @@
 import HomeBanner from "./HomeBanner";
+import HomeNewBooks from "./HomeNewBooks";
 import HomeTopCategories from "./HomeTopCategories";
 
 
@@ -7,6 +8,7 @@ const Home = () => {
             <div>
                   <HomeBanner />
                   <HomeTopCategories />
+                  <HomeNewBooks/>
             </div>
       );
 };

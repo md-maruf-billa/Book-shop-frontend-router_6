@@ -27,7 +27,7 @@ const HomeTopCategories = () => {
             <div className="mt-16">
 
                   <div >
-                        <p className="flex items-center gap-2 text-brandSelect text-sm"><img src={bar} alt="" /> Categories</p>
+                        <p className="flex items-center gap-2 text-brandSelect text-sm"><img src={bar} alt="" /> CATEGORIES</p>
                         <h2 className="text-4xl font-semibold text-brandTextPrimary mt-4">Explore our Top Categories</h2>
                   </div>
 
