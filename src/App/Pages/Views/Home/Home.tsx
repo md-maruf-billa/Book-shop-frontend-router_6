@@ -1,10 +1,12 @@
 import HomeBanner from "./HomeBanner";
+import HomeTopCategories from "./HomeTopCategories";
 
 
 const Home = () => {
       return (
             <div>
-                  <HomeBanner/>
+                  <HomeBanner />
+                  <HomeTopCategories />
             </div>
       );
 };
