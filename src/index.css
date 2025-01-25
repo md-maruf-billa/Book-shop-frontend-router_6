@@ -76,3 +76,24 @@
 a.active {
   color: #ED553B;
 }
+
+.login{
+  background: url("./assets/images/login.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.register{
+  background: url("./assets/images/img1.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

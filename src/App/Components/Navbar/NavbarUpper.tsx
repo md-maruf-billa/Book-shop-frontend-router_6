@@ -6,7 +6,7 @@ import { FaLinkedinIn } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa6";
 const NavbarUpper = () => {
       return (
-            <div className="flex justify-between items-center py-4 border-b border-brandPrimary px-10">
+            <div className="flex justify-between items-center py-4 border-b border-brandPrimary ">
                   <div className="flex items-center gap-1 ">
                         <IoCall />
                         <h3 className="font-semibold">+880 xxxxxxxxxx</h3>

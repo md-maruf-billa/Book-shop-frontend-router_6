@@ -5,10 +5,11 @@ import { GoSearch } from "react-icons/go";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { CiHeart } from "react-icons/ci";
 import { IoIosLogIn } from "react-icons/io";
+import { Link } from 'react-router';
 
 const NavbarMiddle = () => {
       return (
-            <div className='flex items-center justify-between py-2 px-10'>
+            <div className='flex items-center justify-between py-2'>
                   {/* nav start */}
                   <div>
                         <img className='w-3/4' src={logo} alt="" />
@@ -30,10 +31,12 @@ const NavbarMiddle = () => {
                               <CiHeart />
                               WISHLIST
                         </Button>
-                        <Button className='bg-brandTextTertiary hover:bg-brandTextTertiary/70 text-white text-base'>
-                              <IoIosLogIn />
-                              Login
-                        </Button>
+                        <Link to="/login">
+                              <Button className='bg-brandTextTertiary hover:bg-brandTextTertiary/70 text-white text-base'>
+                                    <IoIosLogIn />
+                                    Login
+                              </Button>
+                        </Link>
                   </div>
             </div>
       );
