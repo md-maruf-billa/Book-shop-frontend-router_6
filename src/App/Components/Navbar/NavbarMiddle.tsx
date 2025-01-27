@@ -80,7 +80,7 @@ const NavbarMiddle = () => {
                                                                         <User />
                                                                         <span>Manage Users</span>
                                                                   </DropdownMenuItem>
-                                                                  <Link to="/add-book">
+                                                                  <Link to="/admin/add-book">
                                                                         <DropdownMenuItem>
                                                                               <FilePlus />
                                                                               <span>Add New Book</span>
