@@ -6,7 +6,7 @@ type Tstate = {
   token: string | null
 }
 
-const initialState = {
+const initialState :Tstate= {
   user: null,
   token: null
 }

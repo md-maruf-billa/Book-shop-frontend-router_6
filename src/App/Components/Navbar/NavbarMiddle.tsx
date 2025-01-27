@@ -6,8 +6,36 @@ import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { CiHeart } from "react-icons/ci";
 import { IoIosLogIn } from "react-icons/io";
 import { Link } from 'react-router';
+import { useAppSelector } from '@/App/Redux/hook';
+import { selectUser } from '@/App/Redux/features/user/user.slice';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+      FilePlus,
+      FolderKanban,
+      History,
+      LogOut,
+      Settings,
+      User,
+} from "lucide-react"
+
+import {
+      DropdownMenu,
+      DropdownMenuContent,
+      DropdownMenuGroup,
+      DropdownMenuItem,
+      DropdownMenuLabel,
+      DropdownMenuSeparator,
+      DropdownMenuShortcut,
+      DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
 
 const NavbarMiddle = () => {
+      const user = useAppSelector(selectUser);
+      console.log(user)
+
+
+
       return (
             <div className='flex items-center justify-between py-2'>
                   {/* nav start */}
@@ -31,12 +59,74 @@ const NavbarMiddle = () => {
                               <CiHeart />
                               WISHLIST
                         </Button>
-                        <Link to="/login">
-                              <Button className='bg-brandTextTertiary hover:bg-brandTextTertiary/70 text-white text-base'>
-                                    <IoIosLogIn />
-                                    Login
-                              </Button>
-                        </Link>
+                        {
+                              user?.email ?
+
+                                    <DropdownMenu>
+                                          <DropdownMenuTrigger asChild>
+                                                <Avatar>
+                                                      <AvatarImage src={user?.profileImage} />
+                                                      <AvatarFallback>{user.name[0]}</AvatarFallback>
+                                                </Avatar>
+                                                {/* <Button variant="outline">Open</Button> */}
+                                          </DropdownMenuTrigger>
+                                          <DropdownMenuContent className="w-56 ">
+                                                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                                                <DropdownMenuSeparator />
+                                                {
+                                                      user?.role == "admin" ?
+                                                            <DropdownMenuGroup className='space-y-2'>
+                                                                  <DropdownMenuItem onClick={() => console.log("hello")}>
+                                                                        <User />
+                                                                        <span>Manage Users</span>
+                                                                  </DropdownMenuItem>
+                                                                  <Link to="/add-book">
+                                                                        <DropdownMenuItem>
+                                                                              <FilePlus />
+                                                                              <span>Add New Book</span>
+                                                                        </DropdownMenuItem>
+                                                                  </Link>
+
+                                                                  <DropdownMenuItem>
+                                                                        <FolderKanban />
+                                                                        <span>Manage Books</span>
+                                                                  </DropdownMenuItem>
+                                                                  <DropdownMenuItem>
+                                                                        <History />
+                                                                        <span>Manage Orders</span>
+                                                                  </DropdownMenuItem>
+                                                                  <DropdownMenuItem>
+                                                                        <Settings />
+                                                                        <span>Profile Settings</span>
+                                                                  </DropdownMenuItem>
+                                                            </DropdownMenuGroup>
+                                                            : <DropdownMenuGroup>
+                                                                  <DropdownMenuItem onClick={() => console.log("hello")}>
+                                                                        <User />
+                                                                        <span>Profile Setting</span>
+                                                                  </DropdownMenuItem>
+                                                                  <DropdownMenuItem>
+                                                                        <History />
+                                                                        <span>Order History</span>
+                                                                  </DropdownMenuItem>
+                                                            </DropdownMenuGroup>
+                                                }
+
+                                                <DropdownMenuSeparator />
+                                                <DropdownMenuItem>
+                                                      <LogOut />
+                                                      <span>Log out</span>
+                                                      <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+                                                </DropdownMenuItem>
+                                          </DropdownMenuContent>
+                                    </DropdownMenu> :
+                                    <Link to="/login">
+                                          <Button className='bg-brandTextTertiary hover:bg-brandTextTertiary/70 text-white text-base'>
+                                                <IoIosLogIn />
+                                                Login
+                                          </Button>
+                                    </Link>
+                        }
                   </div>
             </div>
       );
