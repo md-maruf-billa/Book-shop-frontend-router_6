@@ -17,7 +17,7 @@ const Navbar = () => {
                                     <NavLink className="" to={"/"}>HOME</NavLink>
                               </Button>
                               <Button className='bg-transparent text-[#D1D1D1] hover:bg-transparent text-base border-r px-8 border-[#d1d1d175] rounded-none'>
-                                    <NavLink to={"/all-books"}>BOOKS</NavLink>
+                                    <NavLink to={"/books"}>BOOKS</NavLink>
                               </Button>
                               <Button className='bg-transparent text-[#D1D1D1] hover:bg-transparent text-base border-r px-8 border-[#d1d1d175] rounded-none'>
                                     <NavLink to={"/blogs"}>BLOG</NavLink>

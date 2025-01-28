@@ -15,8 +15,14 @@ const userAPI = baseAPI.injectEndpoints({
         method: 'POST',
         body: data
       })
+    }),
+    getAllBooks: build.query({
+      query: () => ({
+        url: '/products',
+        method: 'GET',
+      })
     })
   })
 })
 
-export const { useLoginMutation ,useRegisterMutation} = userAPI
+export const { useLoginMutation ,useRegisterMutation,useGetAllBooksQuery} = userAPI

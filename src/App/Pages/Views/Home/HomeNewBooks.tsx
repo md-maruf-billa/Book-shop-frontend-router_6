@@ -1,10 +1,14 @@
-import book1 from "@/assets/images/book1.png"
 import bar from "@/assets/bar.png"
 import CustomButton from "@/App/Components/Customs/CustomButton";
 import { useState } from "react";
+import { useGetAllBooksQuery } from "@/App/Redux/features/user/user.api";
+import { TBook } from "@/Types";
+import { Link } from "react-router";
 
 const HomeNewBooks = () => {
-      const [isHover, setIsHover] = useState(false)
+      const { data, isLoading } = useGetAllBooksQuery(undefined)
+      const [isHover, setIsHover] = useState("");
+      if (isLoading) return <p>Loading...</p>;
       return (
 
             <div className="mt-16">
@@ -15,67 +19,26 @@ const HomeNewBooks = () => {
 
                   <div className="grid grid-cols-4 gap-8 mt-14">
 
-                        <div onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)} className="border py-4 rounded-lg">
+                        {data?.data.map((book: TBook) => <div key={book._id} onMouseOver={() => setIsHover(book._id)} onMouseLeave={() => setIsHover("")} className="border py-4 rounded-lg">
                               <div className="flex justify-center items-center flex-col relative">
-                                    <img className="shadow-2xl rounded-sm" src={book1} alt="" />
+                                    <img className="shadow-2xl rounded-sm" src={book.bookImage} alt="" />
                                     <button
-                                          className={`bg-brandSelect text-white w-full text-center py-4 tracking-[4px] text-sm absolute bottom-0 cursor-pointer transition-opacity duration-500 ${isHover ? "opacity-100 visible" : "opacity-0 invisible"
+                                          className={`bg-brandSelect text-white w-full text-center py-4 tracking-[4px] text-sm absolute bottom-0 cursor-pointer transition-opacity duration-500 ${isHover == book._id ? "opacity-100 visible" : "opacity-0 invisible"
                                                 }`}
                                     >
                                           ADD TO CART
                                     </button>
                               </div>
                               <div className="text-center space-y-2 mt-4">
-                                    <h2 className="text-brandTextPrimary font-semibold text-xl">Simple way of piece life</h2>
-                                    <small className="text-[#888888]">Armor Ramsey</small>
-                                    <h3 className="text-brandSelect font-bold">$ 40.00</h3>
+                                    <h2 className="text-brandTextPrimary font-semibold text-xl">{book.title}</h2>
+                                    <small className="text-[#888888]">{book.author}</small>
+                                    <h3 className="text-brandSelect font-bold">$ {book.price}</h3>
                               </div>
-                        </div>
-                        <div onMouseOver={() => setIsHover(true)} className="border py-4 rounded-lg">
-                              <div className="flex justify-center items-center flex-col relative">
-                                    <img className="shadow-2xl rounded-sm" src={book1} alt="" />
-                                    <p
-                                          style={{ display: isHover ? "block" : "none" }}
-                                          className="bg-brandSelect text-white w-full text-center py-4 tracking-[4px] text-sm absolute bottom-0 cursor-pointer">ADD TO CART</p>
-                              </div>
-                              <div className="text-center space-y-2 mt-4">
-                                    <h2 className="text-brandTextPrimary font-semibold text-xl">Simple way of piece life</h2>
-                                    <small className="text-[#888888]">Armor Ramsey</small>
-                                    <h3 className="text-brandSelect font-bold">$ 40.00</h3>
-                              </div>
-                        </div>
-                        <div onMouseOver={() => setIsHover(true)} className="border py-4 rounded-lg">
-                              <div className="flex justify-center items-center flex-col relative">
-                                    <img className="shadow-2xl rounded-sm" src={book1} alt="" />
-                                    <p
-                                          style={{ display: isHover ? "block" : "none" }}
-                                          className="bg-brandSelect text-white w-full text-center py-4 tracking-[4px] text-sm absolute bottom-0 cursor-pointer">ADD TO CART</p>
-                              </div>
-                              <div className="text-center space-y-2 mt-4">
-                                    <h2 className="text-brandTextPrimary font-semibold text-xl">Simple way of piece life</h2>
-                                    <small className="text-[#888888]">Armor Ramsey</small>
-                                    <h3 className="text-brandSelect font-bold">$ 40.00</h3>
-                              </div>
-                        </div>
-                        <div onMouseOver={() => setIsHover(true)} className="border py-4 rounded-lg">
-                              <div className="flex justify-center items-center flex-col relative">
-                                    <img className="shadow-2xl rounded-sm" src={book1} alt="" />
-                                    <p
-                                          style={{ display: isHover ? "block" : "none" }}
-                                          className="bg-brandSelect text-white w-full text-center py-4 tracking-[4px] text-sm absolute bottom-0 cursor-pointer">ADD TO CART</p>
-                              </div>
-                              <div className="text-center space-y-2 mt-4">
-                                    <h2 className="text-brandTextPrimary font-semibold text-xl">Simple way of piece life</h2>
-                                    <small className="text-[#888888]">Armor Ramsey</small>
-                                    <h3 className="text-brandSelect font-bold">$ 40.00</h3>
-                              </div>
-                        </div>
-
-
+                        </div>)}
                   </div>
 
                   <div className="flex justify-center items-center mt-14">
-                        <CustomButton btnText="MORE BOOK'S" />
+                       <Link to="/books"> <CustomButton btnText="MORE BOOK'S" /></Link>
                   </div>
 
             </div>
