@@ -26,3 +26,12 @@ export type TBook = {
       isDeleted: boolean;
   };
   
+  export type TBookReview = {
+    bookId: string;
+    reviewerPhoto: string;
+    reviewerName: string;
+    reviewerEmail: string;
+    empression: string;
+    feedBack: string;
+    rating: number;
+};

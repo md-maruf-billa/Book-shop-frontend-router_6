@@ -9,6 +9,7 @@ import {
 import { RootState } from '../store'
 import { logout, setUser } from '../features/user/user.slice'
 
+
 const baseQueryAPI = fetchBaseQuery({
   baseUrl: 'http://localhost:5000/api',
   credentials: 'include',
@@ -52,5 +53,6 @@ const baseQueryWithRefreshTokenVarification: BaseQueryFn<
 export const baseAPI = createApi({
   reducerPath: 'baseAPI',
   baseQuery: baseQueryWithRefreshTokenVarification,
+  tagTypes: ['Book', 'Review'],
   endpoints: () => ({})
 })

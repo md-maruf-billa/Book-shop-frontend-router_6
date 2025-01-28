@@ -19,10 +19,38 @@ const userAPI = baseAPI.injectEndpoints({
     getAllBooks: build.query({
       query: () => ({
         url: '/products',
-        method: 'GET',
+        method: 'GET'
       })
+    }),
+    getBookById: build.query({
+      query: bookId => ({
+        url: `/products/${bookId}`,
+        method: 'GET'
+      })
+    }),
+    sendReview: build.mutation({
+      query: payload => ({
+        url: `/products/review`,
+        method: 'POST',
+        body: payload
+      }),
+      invalidatesTags: ['Review']
+    }),
+    getReviews: build.query({
+      query: bookId => ({
+        url: `/products/review/${bookId}`,
+        method: 'GET'
+      }),
+      providesTags:["Review"]
     })
   })
 })
 
-export const { useLoginMutation ,useRegisterMutation,useGetAllBooksQuery} = userAPI
+export const {
+  useLoginMutation,
+  useRegisterMutation,
+  useGetAllBooksQuery,
+  useGetBookByIdQuery,
+  useSendReviewMutation,
+  useGetReviewsQuery
+} = userAPI

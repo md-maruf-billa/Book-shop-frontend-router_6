@@ -8,6 +8,7 @@ const adminAPI = baseAPI.injectEndpoints({
         method: 'POST',
         body: formData, 
       }),
+      invalidatesTags:["Book"]
     }),
   }),
 });

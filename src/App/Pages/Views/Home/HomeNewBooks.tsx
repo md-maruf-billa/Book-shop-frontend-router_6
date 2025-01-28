@@ -30,7 +30,7 @@ const HomeNewBooks = () => {
                                     </button>
                               </div>
                               <div className="text-center space-y-2 mt-4">
-                                    <h2 className="text-brandTextPrimary font-semibold text-xl">{book.title}</h2>
+                                    <h2 className="text-brandTextPrimary font-semibold text-xl hover:text-brandSelect"> <Link to={`/book-details/${book._id}`} >{book.title}</Link></h2>
                                     <small className="text-[#888888]">{book.author}</small>
                                     <h3 className="text-brandSelect font-bold">$ {book.price}</h3>
                               </div>
@@ -38,7 +38,7 @@ const HomeNewBooks = () => {
                   </div>
 
                   <div className="flex justify-center items-center mt-14">
-                       <Link to="/books"> <CustomButton btnText="MORE BOOK'S" /></Link>
+                        <Link to="/books"> <CustomButton btnText="MORE BOOK'S" /></Link>
                   </div>
 
             </div>
