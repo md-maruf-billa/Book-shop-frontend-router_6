@@ -6,16 +6,19 @@ import cate3 from "@/assets/images/category-3.png"
 
 const data = [
       {
+            id:1,
             title: "Schoole Books",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac. Urna commodo, lacus ut mat",
             img: cate1
       },
       {
+            id:2,
             title: "Management Books",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac. Urna commodo, lacus ut mat",
             img: cate2
       },
       {
+            id:3,
             title: "Novels Books",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac. Urna commodo, lacus ut mat",
             img: cate3
@@ -35,7 +38,7 @@ const HomeTopCategories = () => {
                   <div className="grid grid-cols-3 gap-12 mt-14">
                         {
                               data.map(card =>
-                                    <div className="border p-4 rounded-lg">
+                                    <div key={card.id} className="border p-4 rounded-lg">
                                           <div><img className="w-full" src={card.img} alt="" /></div>
                                           <div >
                                                 <h2 className="text-brandTextPrimary font-semibold text-2xl text-center mt-3">{card.title}</h2>

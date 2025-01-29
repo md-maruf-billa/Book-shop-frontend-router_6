@@ -5,7 +5,7 @@ import { GoSearch } from "react-icons/go";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { CiHeart } from "react-icons/ci";
 import { IoIosLogIn } from "react-icons/io";
-import { Link } from 'react-router';
+import { Link, useLocation } from 'react-router';
 import { useAppSelector } from '@/App/Redux/hook';
 import { selectUser } from '@/App/Redux/features/user/user.slice';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -32,7 +32,7 @@ import {
 
 const NavbarMiddle = () => {
       const user = useAppSelector(selectUser);
-      console.log(user)
+      const {pathname} = useLocation();
 
 
 
@@ -44,7 +44,7 @@ const NavbarMiddle = () => {
                   </div>
 
                   {/* nav middle */}
-                  <div className='relative w-1/3'>
+                  <div className={`${pathname == "/books"?"hidden":"relative w-1/3"} `}>
                         <Input placeholder='Search books' className='rounded-full bg-brandSecondary' />
                         <GoSearch className='absolute right-3 top-1/2 -translate-y-1/2 ' />
                   </div>

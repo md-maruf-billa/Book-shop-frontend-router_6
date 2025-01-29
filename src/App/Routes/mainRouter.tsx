@@ -8,6 +8,7 @@ import AddNewBook from "../Pages/Dashboards/Admin/AddNewBook";
 import Allbooks from "../Pages/Views/AllBooks/Allbooks";
 import BookDetails from "../Pages/Views/BookDetails/BookDetails";
 import Error from "../Pages/Views/Error";
+import VerifyOrder from "../Pages/Views/Orders/VerifyOrder";
 
 const MainRouter = createBrowserRouter([
       {
@@ -20,12 +21,16 @@ const MainRouter = createBrowserRouter([
                         element: <Home />
                   },
                   {
-                        path: "/books",
+                        path: "books",
                         element: <Allbooks />
                   },
                   {
-                        path:"/book-details/:bookId",
+                        path:"book-details/:bookId",
                         element:<BookDetails/>
+                  },
+                  {
+                        path:"verify-order",
+                        element:<VerifyOrder/>
                   }
             ]
 

@@ -12,3 +12,8 @@ export type TResponse = {
     }
   }
 }
+
+export type TAPIParams = {
+  name: string
+  value: string 
+}

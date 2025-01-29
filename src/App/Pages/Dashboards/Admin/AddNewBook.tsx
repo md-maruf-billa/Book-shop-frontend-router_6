@@ -14,20 +14,9 @@ import { useState } from "react";
 import { Controller, FieldValues, SubmitHandler, useForm, FieldError } from "react-hook-form";
 import { TResponse } from '@/Types';
 import { toast } from "sonner";
+import { bookCategories } from "@/constant/conastant";
 
-const bookCategories = [
-      'Fiction',
-      'NonFiction',
-      'Science',
-      'SelfDevelopment',
-      'Poetry',
-      'Religious',
-      'Biography',
-      'Fantasy',
-      'History',
-      'Thriller',
-      'Mystery'
-];
+
 
 const AddNewBook = () => {
       const [createNewBook] = useCreateNewBookMutation();

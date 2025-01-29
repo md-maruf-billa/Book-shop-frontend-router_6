@@ -7,6 +7,7 @@ import { Link } from "react-router";
 
 const HomeNewBooks = () => {
       const { data, isLoading } = useGetAllBooksQuery(undefined)
+      console.log(data)
       const [isHover, setIsHover] = useState("");
       if (isLoading) return <p>Loading...</p>;
       return (
@@ -19,7 +20,7 @@ const HomeNewBooks = () => {
 
                   <div className="grid grid-cols-4 gap-8 mt-14">
 
-                        {data?.data.map((book: TBook) => <div key={book._id} onMouseOver={() => setIsHover(book._id)} onMouseLeave={() => setIsHover("")} className="border py-4 rounded-lg">
+                        {data?.data?.data?.map((book: TBook) => <div key={book._id} onMouseOver={() => setIsHover(book._id)} onMouseLeave={() => setIsHover("")} className="border py-4 rounded-lg">
                               <div className="flex justify-center items-center flex-col relative">
                                     <img className="shadow-2xl rounded-sm" src={book.bookImage} alt="" />
                                     <button

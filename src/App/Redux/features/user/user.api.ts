@@ -1,3 +1,4 @@
+import { TAPIParams } from '@/Types'
 import { baseAPI } from '../../api/baseAPI'
 
 const userAPI = baseAPI.injectEndpoints({
@@ -17,10 +18,21 @@ const userAPI = baseAPI.injectEndpoints({
       })
     }),
     getAllBooks: build.query({
-      query: () => ({
-        url: '/products',
-        method: 'GET'
-      })
+      query: params => {
+        console.log(params)
+        const queries = new URLSearchParams()
+        if (params) {
+          params?.forEach((element: TAPIParams) =>
+            queries.append(element.name, element.value)
+          )
+        }
+
+        return {
+          url: '/products',
+          method: 'GET',
+          params: queries
+        }
+      }
     }),
     getBookById: build.query({
       query: bookId => ({
@@ -41,7 +53,20 @@ const userAPI = baseAPI.injectEndpoints({
         url: `/products/review/${bookId}`,
         method: 'GET'
       }),
-      providesTags:["Review"]
+      providesTags: ['Review']
+    }),
+    createOrder: build.mutation({
+      query: payload => ({
+        url: '/orders',
+        method: 'POST',
+        body: payload
+      })
+    }),
+    verifyOrder: build.query({
+      query: orderId => ({
+        url: `/orders/verify-order/${orderId}`,
+        method: 'GET'
+      })
     })
   })
 })
@@ -52,5 +77,7 @@ export const {
   useGetAllBooksQuery,
   useGetBookByIdQuery,
   useSendReviewMutation,
-  useGetReviewsQuery
+  useGetReviewsQuery,
+  useCreateOrderMutation,
+  useVerifyOrderQuery
 } = userAPI
