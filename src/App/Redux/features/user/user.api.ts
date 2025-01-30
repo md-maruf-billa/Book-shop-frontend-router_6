@@ -1,7 +1,7 @@
 import { TAPIParams } from '@/Types'
 import { baseAPI } from '../../api/baseAPI'
 
-const userAPI = baseAPI.injectEndpoints({
+export const userAPI = baseAPI.injectEndpoints({
   endpoints: build => ({
     login: build.mutation({
       query: (data: { email: string; password: string }) => ({
@@ -67,6 +67,13 @@ const userAPI = baseAPI.injectEndpoints({
         url: `/orders/verify-order/${orderId}`,
         method: 'GET'
       })
+    }),
+    updateProfile: build.mutation({
+      query: payload => ({
+        url: '/user/update-profile',
+        method: 'PATCH',
+        body: payload
+      })
     })
   })
 })
@@ -79,5 +86,6 @@ export const {
   useSendReviewMutation,
   useGetReviewsQuery,
   useCreateOrderMutation,
-  useVerifyOrderQuery
+  useVerifyOrderQuery,
+  useUpdateProfileMutation
 } = userAPI

@@ -22,10 +22,9 @@ const Login = () => {
             }
             const res = await loginUser(payload) as TResponse;
             if (res.data?.success) {
-                  console.log(res)
                   toast.success("Login successful ........!!", { id: toastId })
                   dispatch(setUser({ user: res.data?.data?.user, token: res.data?.data?.accessToken as string }));
-                  navigate(state)
+                  navigate(state || "/")
             } else {
                   toast.error("Something went wrong!! Please provide valid information", { id: toastId })
             }

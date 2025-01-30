@@ -102,10 +102,12 @@ const NavbarMiddle = () => {
                                                                   </DropdownMenuItem>
                                                             </DropdownMenuGroup>
                                                             : <DropdownMenuGroup>
-                                                                  <DropdownMenuItem onClick={() => console.log("hello")}>
-                                                                        <User />
-                                                                        <span>Profile Setting</span>
-                                                                  </DropdownMenuItem>
+                                                                  <Link to="/profile-settting">
+                                                                        <DropdownMenuItem >
+                                                                              <User />
+                                                                              <span>Profile Setting</span>
+                                                                        </DropdownMenuItem>
+                                                                  </Link>
                                                                   <DropdownMenuItem>
                                                                         <History />
                                                                         <span>Order History</span>

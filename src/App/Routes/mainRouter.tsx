@@ -11,6 +11,7 @@ import Error from "../Pages/Views/Error";
 import VerifyOrder from "../Pages/Views/Orders/VerifyOrder";
 import ViewAllOrder from "../Pages/Views/Orders/ViewAllOrder";
 import Auth from "../Pages/Views/Auth/Auth";
+import UserProfileSetting from "../Pages/Dashboards/User/UserProfileSetting";
 
 const MainRouter = createBrowserRouter([
       {
@@ -37,6 +38,10 @@ const MainRouter = createBrowserRouter([
                   {
                         path: "orders",
                         element: <Auth><ViewAllOrder /></Auth>
+                  },
+                  {
+                        path: "profile-settting",
+                        element: <Auth><UserProfileSetting /></Auth>
                   }
             ]
 

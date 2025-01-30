@@ -1,12 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../../store'
+import { TUser } from '@/Types'
+import { userAPI } from './user.api'
 
 type Tstate = {
-  user: any | null
+  user: TUser | null
   token: string | null
 }
 
-const initialState :Tstate= {
+const initialState: Tstate = {
   user: null,
   token: null
 }
@@ -24,6 +26,15 @@ const userSlice = createSlice({
       state.user = null
       state.token = null
     }
+  },
+  extraReducers: builder => {
+    builder.addMatcher(
+      userAPI.endpoints.updateProfile.matchFulfilled,
+      (state, { payload }) => {
+        const { data } = payload
+        state.user = { ...state.user, ...data }
+      }
+    )
   }
 })
 
