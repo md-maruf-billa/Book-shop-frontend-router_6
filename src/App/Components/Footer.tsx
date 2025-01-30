@@ -7,10 +7,10 @@ import { Link } from "react-router";
 const Footer = () => {
       const year = new Date().getFullYear();
       return (
-            <footer className=" footer-background mt-24 p-20">
-                  <div className="flex justify-between">
+            <footer className=" footer-background mt-24 p-8 md:p-20">
+                  <div className="grid grid-cols-3 gap-8 md:gap-0">
                         {/* start */}
-                        <div>
+                        <div className="col-span-3 md:col-span-1 ">
                               <div><img src={logo} alt="" /></div>
                               <h1 className="text-2xl font-semibold text-brandSelect my-3">Mahid Book's</h1>
                               <p className="text-brandTextSecondary">
@@ -26,9 +26,9 @@ const Footer = () => {
                         </div>
 
                         {/* middle */}
-                        <div>
-                              <h2 className="text-brandSelect text-xl font-semibold">LINKS</h2>
-                              <div className="space-y-3 mt-4">
+                        <div className=" text-center">
+                              <h2 className="text-brandSelect md:text-xl font-semibold">LINKS</h2>
+                              <div className="space-y-3 text-sm md:text-base mt-4">
                                     <p>Home</p>
                                     <p>About</p>
                                     <p>Services</p>
@@ -39,8 +39,8 @@ const Footer = () => {
                         </div>
 
                         {/* end */}
-                        <div>
-                              <h2 className="text-brandSelect text-xl font-semibold">LATEST PROJECT</h2>
+                        <div className=" text-end col-span-2 md:col-span-1">
+                              <h2 className="text-brandSelect md:text-xl font-semibold">LATEST PROJECT</h2>
                         </div>
                   </div>
 

@@ -26,7 +26,6 @@ export const userAPI = baseAPI.injectEndpoints({
             queries.append(element.name, element.value)
           )
         }
-
         return {
           url: '/products',
           method: 'GET',
@@ -68,10 +67,23 @@ export const userAPI = baseAPI.injectEndpoints({
         method: 'GET'
       })
     }),
+    getAllOrders: build.query({
+      query: orderId => ({
+        url: `/orders/get-orders/${orderId}`,
+        method: 'GET'
+      })
+    }),
     updateProfile: build.mutation({
       query: payload => ({
         url: '/user/update-profile',
         method: 'PATCH',
+        body: payload
+      })
+    }),
+    updatePassword: build.mutation({
+      query: payload => ({
+        url: '/user/update-password',
+        method: 'PUT',
         body: payload
       })
     })
@@ -87,5 +99,7 @@ export const {
   useGetReviewsQuery,
   useCreateOrderMutation,
   useVerifyOrderQuery,
-  useUpdateProfileMutation
+  useUpdateProfileMutation,
+  useGetAllOrdersQuery,
+  useUpdatePasswordMutation
 } = userAPI

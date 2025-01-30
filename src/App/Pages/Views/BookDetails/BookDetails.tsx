@@ -166,7 +166,7 @@ const BookDetails = () => {
                                                                         <Input
                                                                               id="name"
                                                                               readOnly
-                                                                              value={user.name}
+                                                                              value={user?.name}
                                                                               className="col-span-2 h-8"
                                                                         />
                                                                   </div>
@@ -174,7 +174,7 @@ const BookDetails = () => {
                                                                         <Label htmlFor="email">Email</Label>
                                                                         <Input
                                                                               id="email"
-                                                                              value={user.email}
+                                                                              value={user?.email}
                                                                               readOnly
                                                                               className="col-span-2 h-8"
                                                                         />

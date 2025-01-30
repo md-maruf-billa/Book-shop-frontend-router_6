@@ -1,16 +1,20 @@
-import { useUpdateProfileMutation } from "@/App/Redux/features/user/user.api";
-import { selectUser } from "@/App/Redux/features/user/user.slice";
-import {  useAppSelector } from "@/App/Redux/hook";
+import { useUpdatePasswordMutation, useUpdateProfileMutation } from "@/App/Redux/features/user/user.api";
+import { selectToken, selectUser, setUser } from "@/App/Redux/features/user/user.slice";
+import { useAppDispatch, useAppSelector } from "@/App/Redux/hook";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { TResponse } from "@/Types";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 const UserProfileSetting = () => {
+      const dispatch = useAppDispatch();
       const user = useAppSelector(selectUser);
+      const token = useAppSelector(selectToken)
       const { register, handleSubmit } = useForm();
-      const [updateProfile] = useUpdateProfileMutation()
+      const [updateProfile] = useUpdateProfileMutation();
+      const [updatePassword] = useUpdatePasswordMutation()
 
       const handleUpdateProfile: SubmitHandler<FieldValues> = async (data) => {
             const toastId = toast.loading("Profile updating.......")
@@ -26,8 +30,27 @@ const UserProfileSetting = () => {
             const res = await updateProfile(formData);
             if (res.data?.success) {
                   toast.success("Update successfull", { id: toastId })
+                  dispatch(setUser({ user: res?.data?.data, token: token }));
             } else {
                   toast.error("Something went wrong!! ", { id: toastId })
+            }
+      }
+
+      const handleUpdatePassword: SubmitHandler<FieldValues> = async (data) => {
+            const toastId = toast.loading("Password updating.......")
+            data.preventDefault()
+            const oldPassword = data.target.oldPassword.value;
+            const newPassword = data.target.oldPassword.value;
+            const payload = {
+                  oldPassword,
+                  newPassword
+            }
+            const res = await updatePassword(payload) as TResponse;
+            if (res.data?.success) {
+                  toast.success("Update successfull", { id: toastId })
+                  dispatch(setUser({ user: res?.data?.data, token: token }));
+            } else {
+                  toast.error(res?.error?.data?.message, { id: toastId })
             }
       }
 
@@ -49,15 +72,15 @@ const UserProfileSetting = () => {
                               </p>
                               <div className="mt-4 flex justify-center gap-6 text-gray-700">
                                     <div className="text-center">
-                                          <span className="text-lg font-bold">65</span>
+                                          <span className="text-lg font-bold">--</span>
                                           <p className="text-sm">Total Order's</p>
                                     </div>
                                     <div className="text-center">
-                                          <span className="text-lg font-bold">43</span>
+                                          <span className="text-lg font-bold">--</span>
                                           <p className="text-sm">Recived</p>
                                     </div>
                                     <div className="text-center">
-                                          <span className="text-lg font-bold">21</span>
+                                          <span className="text-lg font-bold">--</span>
                                           <p className="text-sm">Canceled</p>
                                     </div>
                               </div>
@@ -127,15 +150,34 @@ const UserProfileSetting = () => {
                                                 </Button>
                                           </PopoverTrigger>
                                           <PopoverContent className="w-80">
-                                                <div className="grid gap-4">
-                                                      <div className="space-y-2">
-                                                            <h4 className="font-medium leading-none">Dimensions</h4>
-                                                            <p className="text-sm text-muted-foreground">
-                                                                  Set the dimensions for the layer.
-                                                            </p>
+                                                <form onSubmit={handleUpdatePassword} className="grid gap-4">
+                                                      <div className="space-y-2 text-center">
+                                                            <h4 className="leading-none text-center text-brandTextPrimary text-xl font-semibold">Update Your Pssword</h4>
+
                                                       </div>
 
-                                                </div>
+                                                      <div className="space-y-2">
+                                                            <Label htmlFor="oldpass">Old Password</Label>
+                                                            <Input
+                                                                  name="oldPassword"
+                                                                  id="oldpass"
+                                                                  className="col-span-2 h-8"
+                                                            />
+                                                      </div>
+
+                                                      <div className="space-y-2">
+                                                            <Label htmlFor="newpass">New Password</Label>
+                                                            <Input
+                                                                  name="newPassword"
+                                                                  id="newpass"
+                                                                  className="col-span-2 h-8"
+                                                            />
+                                                      </div>
+                                                      <Button type="submit" className=" bg-brandSelect hover:bg-brandSelect/60 text-white px-6 py-2 rounded-full">
+                                                            Change Now
+                                                      </Button>
+
+                                                </form>
                                           </PopoverContent>
                                     </Popover>
 

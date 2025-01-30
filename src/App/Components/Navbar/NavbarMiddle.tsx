@@ -41,22 +41,22 @@ const NavbarMiddle = () => {
             <div className='flex items-center justify-between py-2'>
                   {/* nav start */}
                   <div>
-                        <img className='w-3/4' src={logo} alt="" />
+                        <img className='w-1/2 md:w-3/4' src={logo} alt="" />
                   </div>
 
                   {/* nav middle */}
-                  <div className={`${pathname == "/books" ? "hidden" : "relative w-1/3"} `}>
+                  <div className={`${pathname == "/books" ? "hidden" : "relative w-1/3 hidden md:block"} `}>
                         <Input placeholder='Search books' className='rounded-full bg-brandSecondary' />
                         <GoSearch className='absolute right-3 top-1/2 -translate-y-1/2 ' />
                   </div>
 
                   {/* nav end */}
-                  <div className='flex items-end gap-4'>
-                        <Button className='bg-transparent text-brandTextPrimary hover:bg-transparent text-base border-r-2 rounded-none'>
+                  <div className='flex items-end gap-2 md:gap-4'>
+                        <Button className='bg-transparent text-brandTextPrimary hover:bg-transparent text-xs md:text-base border-r-2 rounded-none'>
                               <HiOutlineShoppingBag />
                               CRAT: ({0})
                         </Button>
-                        <Button className='bg-transparent text-brandTextPrimary hover:bg-transparent text-base border-r-2 rounded-none'>
+                        <Button className='bg-transparent text-brandTextPrimary hover:bg-transparent text-xs md:text-base border-r-2 rounded-none'>
                               <CiHeart />
                               WISHLIST
                         </Button>
@@ -65,7 +65,7 @@ const NavbarMiddle = () => {
 
                                     <DropdownMenu>
                                           <DropdownMenuTrigger asChild>
-                                                <Avatar>
+                                                <Avatar className='cursor-pointer'>
                                                       <AvatarImage src={user?.profileImage} />
                                                       <AvatarFallback>{user.name[0]}</AvatarFallback>
                                                 </Avatar>
@@ -108,10 +108,10 @@ const NavbarMiddle = () => {
                                                                               <span>Profile Setting</span>
                                                                         </DropdownMenuItem>
                                                                   </Link>
-                                                                  <DropdownMenuItem>
+                                                                  <Link to="/orders"><DropdownMenuItem>
                                                                         <History />
                                                                         <span>Order History</span>
-                                                                  </DropdownMenuItem>
+                                                                  </DropdownMenuItem></Link>
                                                             </DropdownMenuGroup>
                                                 }
 
