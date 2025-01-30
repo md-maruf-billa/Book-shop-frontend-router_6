@@ -9,12 +9,14 @@ import Allbooks from "../Pages/Views/AllBooks/Allbooks";
 import BookDetails from "../Pages/Views/BookDetails/BookDetails";
 import Error from "../Pages/Views/Error";
 import VerifyOrder from "../Pages/Views/Orders/VerifyOrder";
+import ViewAllOrder from "../Pages/Views/Orders/ViewAllOrder";
+import Auth from "../Pages/Views/Auth/Auth";
 
 const MainRouter = createBrowserRouter([
       {
             path: "/",
             element: <MainLayout />,
-            errorElement:<Error/>,
+            errorElement: <Error />,
             children: [
                   {
                         index: true,
@@ -25,12 +27,16 @@ const MainRouter = createBrowserRouter([
                         element: <Allbooks />
                   },
                   {
-                        path:"book-details/:bookId",
-                        element:<BookDetails/>
+                        path: "book-details/:bookId",
+                        element: <BookDetails />
                   },
                   {
-                        path:"verify-order",
-                        element:<VerifyOrder/>
+                        path: "verify-order",
+                        element: <VerifyOrder />
+                  },
+                  {
+                        path: "orders",
+                        element: <Auth><ViewAllOrder /></Auth>
                   }
             ]
 
@@ -38,7 +44,7 @@ const MainRouter = createBrowserRouter([
       {
             path: "/admin",
             element: <MainLayout />,
-            errorElement:<Error/>,
+            errorElement: <Error />,
             children: [
                   {
                         index: true,

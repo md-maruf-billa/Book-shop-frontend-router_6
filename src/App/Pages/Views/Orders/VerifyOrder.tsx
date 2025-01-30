@@ -1,7 +1,7 @@
 import Loading from "@/App/Components/Customs/Loading";
 import { useVerifyOrderQuery } from "@/App/Redux/features/user/user.api";
 import { useRef } from "react";
-import { useSearchParams } from "react-router";
+import { Link, useSearchParams } from "react-router";
 // import { useReactToPrint } from "react-to-print";
 import generatePDF from 'react-to-pdf';
 
@@ -38,8 +38,8 @@ const VerifyOrder = () => {
                         {/* Company & Client Info */}
                         <div className="grid grid-cols-2 gap-4 my-6">
                               <div className="text-gray-700">
-                                    <p className="font-semibold">{name}</p>
-                                    <p>{email}</p>
+                                    <p className="font-semibold">Cusotmer Name: {name}</p>
+                                    <p>Customar Email: {email}</p>
                               </div>
                               <div className="text-gray-700 text-right">
                                     <p className="font-semibold">Order Id: #{id}</p>
@@ -78,12 +78,16 @@ const VerifyOrder = () => {
                               <span>৳{payable_amount}</span>
                         </div>
                   </div>
-                  <button
-                        onClick={() => generatePDF(invoiceRef, { filename: "order Invoice.pdf" })}
-                        className="mb-4 bg-brandTextPrimary text-white px-4 py-2 rounded-lg hover:bg-brandTextPrimary/60 transition mt-8"
-                  >
-                        Download PDF
-                  </button>
+                  <div className="flex items-center gap-5">
+                        <Link to="/orders"><button className="mb-4 bg-brandTextPrimary text-white px-4 py-2 rounded-lg hover:bg-brandTextPrimary/60 transition mt-8">View Orders</button></Link>
+                        <button
+                              onClick={() => generatePDF(invoiceRef, { filename: "order Invoice.pdf" })}
+                              className="mb-4 bg-brandTextPrimary text-white px-4 py-2 rounded-lg hover:bg-brandTextPrimary/60 transition mt-8"
+                        >
+                              Download PDF
+                        </button>
+                        <Link to="/"> <button className="mb-4 bg-brandTextPrimary text-white px-4 py-2 rounded-lg hover:bg-brandTextPrimary/60 transition mt-8">Go Home</button></Link>
+                  </div>
             </div>
       );
 };

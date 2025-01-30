@@ -4,12 +4,12 @@ import { useState } from "react";
 import { useGetAllBooksQuery } from "@/App/Redux/features/user/user.api";
 import { TBook } from "@/Types";
 import { Link } from "react-router";
+import Loading from "@/App/Components/Customs/Loading";
 
 const HomeNewBooks = () => {
-      const { data, isLoading } = useGetAllBooksQuery(undefined)
-      console.log(data)
       const [isHover, setIsHover] = useState("");
-      if (isLoading) return <p>Loading...</p>;
+      const { data, isLoading } = useGetAllBooksQuery(undefined)
+      if (isLoading) return <Loading />;
       return (
 
             <div className="mt-16">

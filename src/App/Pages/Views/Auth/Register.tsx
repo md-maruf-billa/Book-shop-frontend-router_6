@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import logo from "@/assets/logo.png"
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useLoginMutation, useRegisterMutation } from '@/App/Redux/features/user/user.api';
@@ -9,6 +9,7 @@ import { useAppDispatch } from '@/App/Redux/hook';
 import { setUser } from '@/App/Redux/features/user/user.slice';
 
 const Register = () => {
+      const navigate = useNavigate();
       const [createUser] = useRegisterMutation();
       const [logingUser] = useLoginMutation();
       const dispatch = useAppDispatch()
@@ -27,6 +28,7 @@ const Register = () => {
                   const logingRes = await logingUser({ email: data.email, password: data.password })
                   dispatch(setUser({ user: logingRes.data?.data?.user, token: logingRes.data?.data?.accessToken as string }));
                   toast.success("Successfully Login.....!", { id: toastId })
+                  navigate("/")
             } else {
                   toast.error("Something went wrong!! Please provide valid information", { id: toastId })
             }

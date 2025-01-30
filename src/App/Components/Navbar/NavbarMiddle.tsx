@@ -6,8 +6,8 @@ import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { CiHeart } from "react-icons/ci";
 import { IoIosLogIn } from "react-icons/io";
 import { Link, useLocation } from 'react-router';
-import { useAppSelector } from '@/App/Redux/hook';
-import { selectUser } from '@/App/Redux/features/user/user.slice';
+import { useAppDispatch, useAppSelector } from '@/App/Redux/hook';
+import { logout, selectUser } from '@/App/Redux/features/user/user.slice';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
       FilePlus,
@@ -28,12 +28,13 @@ import {
       DropdownMenuShortcut,
       DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { toast } from 'sonner';
 
 
 const NavbarMiddle = () => {
       const user = useAppSelector(selectUser);
-      const {pathname} = useLocation();
-
+      const { pathname } = useLocation();
+      const dispatch = useAppDispatch()
 
 
       return (
@@ -44,7 +45,7 @@ const NavbarMiddle = () => {
                   </div>
 
                   {/* nav middle */}
-                  <div className={`${pathname == "/books"?"hidden":"relative w-1/3"} `}>
+                  <div className={`${pathname == "/books" ? "hidden" : "relative w-1/3"} `}>
                         <Input placeholder='Search books' className='rounded-full bg-brandSecondary' />
                         <GoSearch className='absolute right-3 top-1/2 -translate-y-1/2 ' />
                   </div>
@@ -113,7 +114,10 @@ const NavbarMiddle = () => {
                                                 }
 
                                                 <DropdownMenuSeparator />
-                                                <DropdownMenuItem>
+                                                <DropdownMenuItem onClick={() => {
+                                                      dispatch(logout())
+                                                      toast.success("Logout Successfull...")
+                                                }}>
                                                       <LogOut />
                                                       <span>Log out</span>
                                                       <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
