@@ -46,7 +46,6 @@ const ManageBook = () => {
                   }
             } catch (err) {
                   toast.error("Error updating the book!", { id: toastId })
-                  console.log(err)
             }
 
       }

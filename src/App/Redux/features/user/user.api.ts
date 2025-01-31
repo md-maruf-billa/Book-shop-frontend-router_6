@@ -19,7 +19,6 @@ export const userAPI = baseAPI.injectEndpoints({
     }),
     getAllBooks: build.query({
       query: params => {
-        console.log(params)
         const queries = new URLSearchParams()
         if (params) {
           params?.forEach((element: TAPIParams) =>

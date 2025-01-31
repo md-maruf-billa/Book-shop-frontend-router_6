@@ -17,7 +17,6 @@ export default function ViewAllOrder() {
       const user = useAppSelector(selectUser)
       const { data, isLoading } = useGetAllOrdersQuery(user?.email);
       if (isLoading) return <Loading />
-      console.log(data?.data)
 
       const orderData = data?.data.map((item: Record<string, any>) => ({
             orderId: item?.orderInfo?.orderId,

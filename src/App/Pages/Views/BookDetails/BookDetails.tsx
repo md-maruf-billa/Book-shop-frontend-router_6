@@ -46,7 +46,6 @@ const BookDetails = () => {
             }
             const res = await createReview(reviewPayload) as TResponse
             if (res.data?.success) {
-                  console.log(res)
                   toast.success("Review successfully submitted ........!!", { id: toastId })
             } else {
                   toast.error("Something went wrong!! Please provide valid information", { id: toastId })
@@ -73,7 +72,6 @@ const BookDetails = () => {
             if (user && user?.role == "admin") return toast.error("You are admin, you can't plase order.", { id: toastId })
             try {
                   const res = await createOrder(orderPayload) as TResponse
-                  console.log(res)
                   if (res?.data?.success) {
                         toast.success("Order created successfully!", { id: toastId });
                         window.location.href = res?.data?.data
@@ -84,8 +82,6 @@ const BookDetails = () => {
                   toast.error("An error occurred. Please try again.", { id: toastId });
             }
       };
-      console.log(user)
-
 
       return (
             <div>
