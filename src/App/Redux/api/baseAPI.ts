@@ -11,7 +11,7 @@ import { logout, setUser } from '../features/user/user.slice'
 
 
 const baseQueryAPI = fetchBaseQuery({
-  baseUrl: 'http://localhost:5000/api',
+  baseUrl: 'https://bookshopa2.vercel.app/api',
   credentials: 'include',
   prepareHeaders (headers, { getState }) {
     const token = (getState() as RootState).auth.token
@@ -30,7 +30,7 @@ const baseQueryWithRefreshTokenVarification: BaseQueryFn<
   let result = await baseQueryAPI(args, api, extraOptions)
   if (result?.error?.status === 401) {
     const refToken = await fetch(
-      'http://localhost:5000/api/auth/refresh-token',
+      'https://bookshopa2.vercel.app/api/auth/refresh-token',
       { method: 'POST', credentials: 'include' }
     )
     const { data } = await refToken.json()

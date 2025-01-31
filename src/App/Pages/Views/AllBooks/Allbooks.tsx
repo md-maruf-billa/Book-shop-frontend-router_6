@@ -66,10 +66,10 @@ const AllBooks = () => {
                   </div>
 
                   {/* Filter and search section */}
-                  <div className="flex my-8 justify-between">
-                        <div className="flex items-center gap-5">
+                  <div className="flex my-8 flex-wrap md:flex-nowrap justify-between gap-5 md:gap-0">
+                        <div className="flex flex-wrap items-center gap-5">
                               <Select onValueChange={setPriceRange}>
-                                    <SelectTrigger className="w-[180px]">
+                                    <SelectTrigger className="w-[160px] md:w-[180px]">
                                           <SelectValue placeholder="Filter with Price" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -86,7 +86,7 @@ const AllBooks = () => {
                               </Select>
 
                               <Select onValueChange={setCategoryFilter}>
-                                    <SelectTrigger className="w-[180px]">
+                                    <SelectTrigger className="w-[160px] md:w-[180px]">
                                           <SelectValue placeholder="Filter with Category" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -103,7 +103,7 @@ const AllBooks = () => {
                               </Select>
 
                               <Select onValueChange={setStockFilter}>
-                                    <SelectTrigger className="w-[180px]">
+                                    <SelectTrigger className="w-[160px] md:w-[180px]">
                                           <SelectValue placeholder="Filter with Stock" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -116,7 +116,7 @@ const AllBooks = () => {
                               </Select>
 
                               <Select onValueChange={setAuthorFilter}>
-                                    <SelectTrigger className="w-[180px]">
+                                    <SelectTrigger className="w-[160px] md:w-[180px]">
                                           <SelectValue placeholder="Filter with Author" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -133,7 +133,7 @@ const AllBooks = () => {
                               </Select>
                         </div>
 
-                        <div className="relative w-1/3">
+                        <div className="relative w-full md:w-2/3 lg:w-1/3 h-fit">
                               <Input
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
@@ -151,7 +151,7 @@ const AllBooks = () => {
                   </div>
 
                   {/* Books Display */}
-                  <div className="grid grid-cols-4 gap-8">
+                  <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
                         {data?.data?.data.map((book: TBook) => (
                               <div key={book._id} className="border rounded-md py-4">
                                     <div>

@@ -89,21 +89,21 @@ const BookDetails = () => {
 
       return (
             <div>
-                  <div className="flex items-center">
-                        <div className="w-1/3 relative">
-                              <img className="w-full " src={bookImage} alt="" />
+                  <div className="flex flex-col lg:flex-row items-center ">
+                        <div className="w-full lg:w-1/3 relative flex justify-center items-center">
+                              <img className="w-full md:w-1/2 lg:w-full " src={bookImage} alt="" />
                               {!inStock && <span className=" absolute top-10 right-0 p-2 bg-brandSelect text-white rounded-sm">Out of Stock</span>}
 
                         </div>
-                        <div className="w-1/2 space-y-6">
-                              <h1 className="text-5xl font-semibold text-brandTextPrimary">{title}</h1>
+                        <div className="w-full lg:w-1/2 space-y-6">
+                              <h1 className="text-3xl md:text-5xl font-semibold text-brandTextPrimary">{title}</h1>
                               <h3 className="italic text-brandTextSecondary">By - <span className="text-[#888]">{author}</span></h3>
                               <h3><span className="italic text-brandTextSecondary">Category:</span> <span className="text-[#888]"> {category}</span></h3>
                               <p className="text-[#888] text-justify">
                                     <span className="italic text-brandTextSecondary">  Summary,</span> <br />
                                     {description}
                               </p>
-                              <div className="flex items-center justify-between">
+                              <div className="flex items-center justify-between flex-wrap gap-2 md:gap-0">
                                     <button className="border px-6 py-2 rounded-full bg-brandSecondary"><span className="italic text-brandTextSecondary">Type:</span> <span className="text-brandSelect font-semibold">{exchangeable}</span></button>
 
                                     <button className="border px-6 py-2 rounded-full bg-brandSecondary"><span className="italic text-brandTextSecondary">Price:</span> <span className="text-brandSelect font-semibold">${price}</span></button>
@@ -122,7 +122,7 @@ const BookDetails = () => {
                                                       {/* <Button variant="outline">Open popover</Button> */}
                                                       <button className="border cursor-pointer  px-8 py-2 rounded-full bg-brandTextPrimary hover:bg-brandTextPrimary/60 text-white hover:text-brandSecondary  transition-colors duration-500">Buy Now</button>
                                                 </PopoverTrigger>
-                                                <PopoverContent className="w-[400px]  ">
+                                                <PopoverContent className="w-[350px]  ">
 
                                                       <div className="grid gap-4">
                                                             <div className="space-y-2 text-center">
@@ -142,7 +142,7 @@ const BookDetails = () => {
                                                                               className="col-span-2 h-8"
                                                                         />
                                                                   </div>
-                                                                  <div className="flex items-center justify-between">
+                                                                  <div className="flex items-center gap-4 justify-between">
                                                                         <div className="space-y-2">
                                                                               <Label htmlFor="price">Book Price</Label>
                                                                               <Input
@@ -213,9 +213,9 @@ const BookDetails = () => {
                               </div>
                         </div>
                   </div>
-                  <hr />
-                  <div className="flex justify-between gap-10">
-                        <div className="h-[500px] overflow-y-auto scroll-smooth w-full">
+                  <hr  className="mt-10"/>
+                  <div className="flex flex-col md:flex-row justify-between gap-10 mt-10">
+                        <div className="h-[500px] overflow-y-auto scroll-smooth w-full md:w-auto lg:w-full">
                               <h1>Reviews & Retings</h1>
 
                               {
@@ -238,7 +238,7 @@ const BookDetails = () => {
                               }
 
                         </div>
-                        <form onSubmit={handleSubmit(handelSubmitReview)} className="w-1/3 border p-4 space-y-3">
+                        <form onSubmit={handleSubmit(handelSubmitReview)} className="w-full md:w-1/2 lg:w-1/3 border h-fit p-4 space-y-3">
                               <h1 className="tracking-[4px] text-brandTextTertiary font-semibold text-xl text-center">GIVE YOUR REVIEW</h1>
 
                               <Input {...register("rating")} placeholder="Give a rating ⭐" />

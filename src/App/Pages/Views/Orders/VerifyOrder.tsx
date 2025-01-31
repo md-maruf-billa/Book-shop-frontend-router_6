@@ -79,14 +79,14 @@ const VerifyOrder = () => {
                         </div>
                   </div>
                   <div className="flex items-center gap-5">
-                        <Link to="/orders"><button className="mb-4 bg-brandTextPrimary text-white px-4 py-2 rounded-lg hover:bg-brandTextPrimary/60 transition mt-8">View Orders</button></Link>
+                        <Link to="/orders"><button className="mb-4 bg-brandTextPrimary text-white text-xs md:text-base px-2 md:px-4 py-2 rounded-lg hover:bg-brandTextPrimary/60 transition mt-8">View Orders</button></Link>
                         <button
                               onClick={() => generatePDF(invoiceRef, { filename: "order Invoice.pdf" })}
-                              className="mb-4 bg-brandTextPrimary text-white px-4 py-2 rounded-lg hover:bg-brandTextPrimary/60 transition mt-8"
+                              className="mb-4 bg-brandTextPrimary text-white text-xs md:text-base px-2 md:px-4 py-2 rounded-lg hover:bg-brandTextPrimary/60 transition mt-8"
                         >
                               Download PDF
                         </button>
-                        <Link to="/"> <button className="mb-4 bg-brandTextPrimary text-white px-4 py-2 rounded-lg hover:bg-brandTextPrimary/60 transition mt-8">Go Home</button></Link>
+                        <Link to="/"> <button className="mb-4 bg-brandTextPrimary text-white text-xs md:text-base px-2 md:px-4 py-2 rounded-lg hover:bg-brandTextPrimary/60 transition mt-8">Go Home</button></Link>
                   </div>
             </div>
       );

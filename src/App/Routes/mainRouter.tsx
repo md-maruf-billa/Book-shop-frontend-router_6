@@ -37,7 +37,7 @@ const MainRouter = createBrowserRouter([
                   },
                   {
                         path: "verify-order",
-                        element: <VerifyOrder />
+                        element: <Auth access="user"><VerifyOrder /></Auth>
                   },
                   {
                         path: "orders",

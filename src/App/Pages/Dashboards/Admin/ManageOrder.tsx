@@ -28,7 +28,7 @@ const ManageOrder = () => {
       }
       return (
             <div>
-                  <h1 className="my-8 text-3xl text-brandTextPrimary font-semibold">Your Order's</h1>
+                  <h1 className="my-8 text-3xl text-brandTextPrimary font-semibold">Order's</h1>
                   <Table>
                         <TableCaption>A list of your recent orders.</TableCaption>
                         <TableHeader>
@@ -53,16 +53,16 @@ const ManageOrder = () => {
                                           <TableCell>{order?.quantity}</TableCell>
                                           <TableCell>{order?.email}</TableCell>
                                           <TableCell>{order?.price}</TableCell>
-                                          <TableCell className="text-right w-[350px] gap-2 flex justify-end">
+                                          <TableCell className="text-right w-[300px] lg:w-fit gap-2 flex justify-end">
                                                 <Popover>
                                                       <PopoverTrigger asChild>
                                                             <button className="border hover:bg-brandTextPrimary hover:text-white px-4 py-2 rounded-full">
                                                                   View Details
                                                             </button>
                                                       </PopoverTrigger>
-                                                      <PopoverContent className="w-[500px]">
+                                                      <PopoverContent className="w-full">
                                                             <div className="flex flex-col items-center py-10 ">
-                                                                  <div ref={order?.invoiceRef} className=" rounded-lg p-6 w-full max-w-2xl">
+                                                                  <div ref={order?.invoiceRef} className=" rounded-lg p-2 w-full max-w-sm">
                                                                         <div className="text-center">
                                                                               <h1 className="text-3xl font-semibold text-brandTextPrimary">Invoice of Mahid Book's</h1>
                                                                               <h3 className="text-lg italic text-gray-600 mt-2 mb-6">
@@ -127,7 +127,7 @@ const ManageOrder = () => {
                                                             </div>
                                                       </PopoverContent>
                                                 </Popover>
-                                                <Button onClick={() => handleUpdateOrderStatus(order?._id)} disabled={order?.orderStatus == "Cancelled" || !order?.orderStatus || order?.orderStatus == "Complete"} className="rounded-full  bg-brandTextPrimary"   >Complete Now</Button>
+                                                <Button onClick={() => handleUpdateOrderStatus(order?._id)} disabled={order?.orderStatus == "Cancelled" || !order?.orderStatus || order?.orderStatus == "Completed"} className="rounded-full  bg-brandTextPrimary"   >Complete Now</Button>
 
                                           </TableCell>
                                     </TableRow>
