@@ -27,7 +27,7 @@ export default function ViewAllOrder() {
             quantity: item?.quantity,
             productId: item?.product
       }))
-
+      const totalPrice = orderData?.reduce((acc: number, item: Record<string, any>) => acc + (Number(item.totalAmount) || 0), 0);
       return (
             <>
                   <h1 className="my-4 text-center text-3xl text-brandTextPrimary font-semibold">Your Order's</h1>
@@ -58,7 +58,7 @@ export default function ViewAllOrder() {
                         <TableFooter>
                               <TableRow>
                                     <TableCell colSpan={5}>Total</TableCell>
-                                    <TableCell className="text-right">$2,500.00</TableCell>
+                                    <TableCell className="text-right">${totalPrice}</TableCell>
                               </TableRow>
                         </TableFooter>
                   </Table>

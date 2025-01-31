@@ -20,7 +20,7 @@ const HomeNewBooks = () => {
 
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8 mt-14">
 
-                        {data?.data?.data?.map((book: TBook) => <div key={book._id} onMouseOver={() => setIsHover(book._id)} onMouseLeave={() => setIsHover("")} className="border py-4 rounded-lg">
+                        {data?.data?.data?.slice(0,8)?.map((book: TBook) => <div key={book._id} onMouseOver={() => setIsHover(book._id)} onMouseLeave={() => setIsHover("")} className="border py-4 rounded-lg">
                               <div className="flex justify-center items-center flex-col relative">
                                     <img className="shadow-2xl rounded-sm" src={book.bookImage} alt="" />
                                     <button

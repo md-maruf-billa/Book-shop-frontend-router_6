@@ -12,6 +12,10 @@ import VerifyOrder from "../Pages/Views/Orders/VerifyOrder";
 import ViewAllOrder from "../Pages/Views/Orders/ViewAllOrder";
 import Auth from "../Pages/Views/Auth/Auth";
 import UserProfileSetting from "../Pages/Dashboards/User/UserProfileSetting";
+import AllUsers from "../Pages/Dashboards/Admin/AllUsers";
+import ManageOrder from "../Pages/Dashboards/Admin/ManageOrder";
+import AboutUs from "../Pages/Views/AboutUs/AboutUs";
+import ManageBook from "../Pages/Dashboards/Admin/ManageBook";
 
 const MainRouter = createBrowserRouter([
       {
@@ -37,18 +41,22 @@ const MainRouter = createBrowserRouter([
                   },
                   {
                         path: "orders",
-                        element: <Auth><ViewAllOrder /></Auth>
+                        element: <Auth access="user"><ViewAllOrder /></Auth>
                   },
                   {
                         path: "profile-settting",
-                        element: <Auth><UserProfileSetting /></Auth>
+                        element: <Auth access="user"><UserProfileSetting /></Auth>
+                  },
+                  {
+                        path: "about-us",
+                        element: <AboutUs />
                   }
             ]
 
       },
       {
             path: "/admin",
-            element: <MainLayout />,
+            element: <Auth access="admin"> <MainLayout /></Auth>,
             errorElement: <Error />,
             children: [
                   {
@@ -58,6 +66,18 @@ const MainRouter = createBrowserRouter([
                   {
                         path: "add-book",
                         element: <AddNewBook />
+                  },
+                  {
+                        path: "all-users",
+                        element: <AllUsers />
+                  },
+                  {
+                        path: "manage-orders",
+                        element: <ManageOrder />
+                  },
+                  {
+                        path: "manage-books",
+                        element: <ManageBook />
                   }
             ]
 

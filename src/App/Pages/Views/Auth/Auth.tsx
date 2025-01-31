@@ -5,11 +5,12 @@ import { Navigate, useLocation } from "react-router";
 
 type TAuthProps = {
       children: ReactNode;
+      access: 'admin' | 'user'
 }
-const Auth = ({ children }: TAuthProps) => {
+const Auth = ({ children, access }: TAuthProps) => {
       const user = useAppSelector(selectUser);
       const { pathname } = useLocation();
-      if (!user) return <Navigate state={pathname} replace={true} to="/login" />
+      if (!user || access !== user?.role) return <Navigate state={pathname} replace={true} to="/login" />
 
 
 

@@ -7,5 +7,6 @@ export type TUser = {
   address?: string
   phone?: string
   role: string;
-  isDeleted?: boolean
+  isDeleted?: boolean,
+  accountStatus?:"blocked" | "active"
 }

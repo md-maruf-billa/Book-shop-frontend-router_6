@@ -19,10 +19,10 @@ const Navbar = () => {
                               <Button className='bg-transparent text-[#D1D1D1] hover:bg-transparent text-xs md:text-base border-r md:px-8 border-[#d1d1d175] rounded-none'>
                                     <NavLink to={"/books"}>BOOKS</NavLink>
                               </Button>
-                              <Button className='bg-transparent text-[#D1D1D1] hover:bg-transparent text-xs md:text-base border-r md:px-8 border-[#d1d1d175] rounded-none'>
+                              {/* <Button className='bg-transparent text-[#D1D1D1] hover:bg-transparent text-xs md:text-base border-r md:px-8 border-[#d1d1d175] rounded-none'>
                                     <NavLink to={"/blogs"}>BLOG</NavLink>
-                              </Button>
-                              <Button className='bg-transparent text-[#D1D1D1] hover:bg-transparent text-xs md:text-base border-r md:px-8 border-[#d1d1d175] rounded-none'>
+                              </Button> */}
+                              <Button className='bg-transparent text-[#D1D1D1] hover:bg-transparent text-xs md:text-base  md:px-8 border-[#d1d1d175] rounded-none'>
                                     <NavLink to={"/about-us"}>ABOUT US</NavLink>
                               </Button>
                               {/* <Button className='bg-transparent text-[#D1D1D1] hover:bg-transparent text-xs md:text-base'>

@@ -31,13 +31,21 @@ export const userAPI = baseAPI.injectEndpoints({
           method: 'GET',
           params: queries
         }
-      }
+      },
+      providesTags: ['Book']
     }),
     getBookById: build.query({
       query: bookId => ({
         url: `/products/${bookId}`,
         method: 'GET'
       })
+    }),
+    deleteBook: build.mutation({
+      query: bookId => ({
+        url: `/products/delete-book/${bookId}`,
+        method: 'DELETE'
+      }),
+      invalidatesTags: ['Book']
     }),
     sendReview: build.mutation({
       query: payload => ({
@@ -61,6 +69,13 @@ export const userAPI = baseAPI.injectEndpoints({
         body: payload
       })
     }),
+    updateOrderStatus: build.mutation({
+      query: payload => ({
+        url: `/orders/update-order-status/${payload}`,
+        method: 'PUT'
+      }),
+      invalidatesTags: ['Order']
+    }),
     verifyOrder: build.query({
       query: orderId => ({
         url: `/orders/verify-order/${orderId}`,
@@ -73,6 +88,13 @@ export const userAPI = baseAPI.injectEndpoints({
         method: 'GET'
       })
     }),
+    getAllOrdersForAdmin: build.query({
+      query: () => ({
+        url: '/orders/all-orders',
+        method: 'GET'
+      }),
+      providesTags: ['Order']
+    }),
     updateProfile: build.mutation({
       query: payload => ({
         url: '/user/update-profile',
@@ -80,12 +102,35 @@ export const userAPI = baseAPI.injectEndpoints({
         body: payload
       })
     }),
+    blockUser: build.mutation({
+      query: payload => ({
+        url: '/user/deactivate-user',
+        method: 'PATCH',
+        body: payload
+      }),
+      invalidatesTags: ['User']
+    }),
     updatePassword: build.mutation({
       query: payload => ({
         url: '/user/update-password',
         method: 'PUT',
         body: payload
       })
+    }),
+    getAllUsers: build.query({
+      query: () => ({
+        url: '/user/get-all-user',
+        method: 'GET'
+      }),
+      providesTags: ['User']
+    }),
+    updateBook: build.mutation({
+      query: payload => ({
+        url: 'products/update-book',
+        method: 'PUT',
+        body: payload
+      }),
+      invalidatesTags: ['Book']
     })
   })
 })
@@ -101,5 +146,11 @@ export const {
   useVerifyOrderQuery,
   useUpdateProfileMutation,
   useGetAllOrdersQuery,
-  useUpdatePasswordMutation
+  useUpdatePasswordMutation,
+  useGetAllUsersQuery,
+  useGetAllOrdersForAdminQuery,
+  useBlockUserMutation,
+  useUpdateBookMutation,
+  useDeleteBookMutation,
+  useUpdateOrderStatusMutation
 } = userAPI

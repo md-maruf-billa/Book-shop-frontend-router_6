@@ -14,7 +14,7 @@ import { useParams } from "react-router";
 import { toast } from "sonner";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Label } from "@/components/ui/label";
-import {  useState } from "react";
+import { useState } from "react";
 import Loading from "@/App/Components/Customs/Loading";
 
 
@@ -59,6 +59,7 @@ const BookDetails = () => {
       const { bookImage, title, author, category, description, exchangeable, price, publishYear, quantity, inStock, _id } = data?.data;
 
       const handleOrderSubmit = async () => {
+            const toastId = toast.loading("Order Creating......")
             const orderPayload = {
                   email: user?.email,
                   name: user?.name,
@@ -68,21 +69,22 @@ const BookDetails = () => {
                   address: address || user?.address,
                   orderNote: note
             };
-
+            if (!user) return toast.error("Please Login First!!", { id: toastId })
+            if (user && user?.role == "admin") return toast.error("You are admin, you can't plase order.", { id: toastId })
             try {
                   const res = await createOrder(orderPayload) as TResponse
                   console.log(res)
                   if (res?.data?.success) {
-                        toast.success("Order created successfully!");
+                        toast.success("Order created successfully!", { id: toastId });
                         window.location.href = res?.data?.data
                   } else {
-                        toast.error(JSON.stringify(res?.error?.data?.message));
+                        toast.error(JSON.stringify(res?.error?.data?.message), { id: toastId });
                   }
             } catch (error) {
-                  toast.error("An error occurred. Please try again.");
+                  toast.error("An error occurred. Please try again.", { id: toastId });
             }
       };
-
+      console.log(user)
 
 
       return (

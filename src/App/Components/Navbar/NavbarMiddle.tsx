@@ -1,11 +1,9 @@
 import logo from '@/assets/logo.png'
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { GoSearch } from "react-icons/go";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { CiHeart } from "react-icons/ci";
 import { IoIosLogIn } from "react-icons/io";
-import { Link, useLocation } from 'react-router';
+import { Link } from 'react-router';
 import { useAppDispatch, useAppSelector } from '@/App/Redux/hook';
 import { logout, selectUser } from '@/App/Redux/features/user/user.slice';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -14,7 +12,6 @@ import {
       FolderKanban,
       History,
       LogOut,
-      Settings,
       User,
 } from "lucide-react"
 
@@ -33,7 +30,7 @@ import { toast } from 'sonner';
 
 const NavbarMiddle = () => {
       const user = useAppSelector(selectUser);
-      const { pathname } = useLocation();
+      // const { pathname } = useLocation();
       const dispatch = useAppDispatch()
 
 
@@ -45,10 +42,10 @@ const NavbarMiddle = () => {
                   </div>
 
                   {/* nav middle */}
-                  <div className={`${pathname == "/books" ? "hidden" : "relative w-1/3 hidden md:block"} `}>
+                  {/* <div className={`${pathname == "/books" ? "hidden" : "relative w-1/3 hidden md:block"} `}>
                         <Input placeholder='Search books' className='rounded-full bg-brandSecondary' />
                         <GoSearch className='absolute right-3 top-1/2 -translate-y-1/2 ' />
-                  </div>
+                  </div> */}
 
                   {/* nav end */}
                   <div className='flex items-end gap-2 md:gap-4'>
@@ -77,10 +74,12 @@ const NavbarMiddle = () => {
                                                 {
                                                       user?.role == "admin" ?
                                                             <DropdownMenuGroup className='space-y-2'>
-                                                                  <DropdownMenuItem onClick={() => console.log("hello")}>
-                                                                        <User />
-                                                                        <span>Manage Users</span>
-                                                                  </DropdownMenuItem>
+                                                                  <Link to="/admin/all-users">
+                                                                        <DropdownMenuItem >
+                                                                              <User />
+                                                                              <span>Manage Users</span>
+                                                                        </DropdownMenuItem>
+                                                                  </Link>
                                                                   <Link to="/admin/add-book">
                                                                         <DropdownMenuItem>
                                                                               <FilePlus />
@@ -88,18 +87,22 @@ const NavbarMiddle = () => {
                                                                         </DropdownMenuItem>
                                                                   </Link>
 
-                                                                  <DropdownMenuItem>
-                                                                        <FolderKanban />
-                                                                        <span>Manage Books</span>
-                                                                  </DropdownMenuItem>
-                                                                  <DropdownMenuItem>
-                                                                        <History />
-                                                                        <span>Manage Orders</span>
-                                                                  </DropdownMenuItem>
-                                                                  <DropdownMenuItem>
+                                                                  <Link to="/admin/manage-books">
+                                                                        <DropdownMenuItem>
+                                                                              <FolderKanban />
+                                                                              <span>Manage Books</span>
+                                                                        </DropdownMenuItem>
+                                                                  </Link>
+                                                                  <Link to="/admin/manage-orders">
+                                                                        <DropdownMenuItem>
+                                                                              <History />
+                                                                              <span>Manage Orders</span>
+                                                                        </DropdownMenuItem>
+                                                                  </Link>
+                                                                  {/* <DropdownMenuItem>
                                                                         <Settings />
                                                                         <span>Profile Settings</span>
-                                                                  </DropdownMenuItem>
+                                                                  </DropdownMenuItem> */}
                                                             </DropdownMenuGroup>
                                                             : <DropdownMenuGroup>
                                                                   <Link to="/profile-settting">
