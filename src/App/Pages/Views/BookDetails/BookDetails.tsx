@@ -5,17 +5,37 @@ import { selectUser } from "@/App/Redux/features/user/user.slice";
 import { useAppSelector } from "@/App/Redux/hook";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { TBookReview, TResponse } from "@/Types";
 import { Heart, Minus, Plus, ShoppingCart } from "lucide-react";
-import { Controller, FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useParams } from "react-router";
 import { toast } from "sonner";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import Loading from "@/App/Components/Customs/Loading";
+import { Rating } from '@smastrom/react-rating'
+import '@smastrom/react-rating/style.css'
+
+
+function getRating(rating: number) {
+      switch (rating) {
+            case 1:
+                  return 'Very Bad';
+            case 2:
+                  return 'Bad';
+            case 3:
+                  return 'Good';
+            case 4:
+                  return 'Very good';
+            case 5:
+                  return 'Highly Recomended';
+            default:
+                  return 'None';
+      }
+}
+
 
 
 const BookDetails = () => {
@@ -25,24 +45,28 @@ const BookDetails = () => {
       const { data, isLoading } = useGetBookByIdQuery(bookId);
       const { data: reviews } = useGetReviewsQuery(bookId, { skip: isLoading })
       const user = useAppSelector(selectUser);
+      const [rating, setRating] = useState(0);
+
 
       // local state
       const [note, setNote] = useState<string>("")
       const [address, setAddress] = useState<string>("")
 
       const [createOrder] = useCreateOrderMutation()
-      const { register, handleSubmit, control } = useForm();
+      const { register, handleSubmit } = useForm();
 
       const handelSubmitReview: SubmitHandler<FieldValues> = async (data) => {
             const toastId = toast.loading("Review Submitting......");
+            if (!user?.email) return toast.error("Please Login First", { id: toastId })
+            if (rating == 0 || data?.feedBack.length == 0) return toast.error("Please provide feedback", { id: toastId })
             const reviewPayload = {
                   bookId,
                   reviewerPhoto: user?.profileImage,
                   reviewerName: user?.name,
                   reviewerEmail: user?.email,
-                  empression: data.empression,
+                  empression: getRating(rating),
                   feedBack: data.feedBack,
-                  rating: Number(data.rating)
+                  rating: rating
             }
             const res = await createReview(reviewPayload) as TResponse
             if (res.data?.success) {
@@ -209,7 +233,7 @@ const BookDetails = () => {
                               </div>
                         </div>
                   </div>
-                  <hr  className="mt-10"/>
+                  <hr className="mt-10" />
                   <div className="flex flex-col md:flex-row justify-between gap-10 mt-10">
                         <div className="h-[500px] overflow-y-auto scroll-smooth w-full md:w-auto lg:w-full">
                               <h1>Reviews & Retings</h1>
@@ -224,7 +248,11 @@ const BookDetails = () => {
                                                       </Avatar>
                                                 </div>
                                                 <div className="space-y-1">
-                                                      <h3>{review.rating}</h3>
+                                                      <Rating
+                                                            style={{ maxWidth: 100 }}
+                                                            value={review.rating}
+                                                            readOnly
+                                                      />
                                                       <h3 className="font-semibold text-brandTextPrimary italic">{review.empression}</h3>
                                                       <h3 className="text-sm text-gray-500"><span className="text-brandTextSecondary italic">Reviewer-</span> {review.reviewerName}</h3>
                                                       <p className="text-gray-500 italic">"{review.feedBack} "</p>
@@ -234,37 +262,17 @@ const BookDetails = () => {
                               }
 
                         </div>
-                        <form onSubmit={handleSubmit(handelSubmitReview)} className="w-full md:w-1/2 lg:w-1/3 border h-fit p-4 space-y-3">
+                        <form onSubmit={handleSubmit(handelSubmitReview)} className="w-full md:w-1/2 lg:w-1/3 border h-fit p-4">
                               <h1 className="tracking-[4px] text-brandTextTertiary font-semibold text-xl text-center">GIVE YOUR REVIEW</h1>
 
-                              <Input {...register("rating")} placeholder="Give a rating ⭐" />
-                              <Controller
-                                    name="empression"
-                                    control={control}
-                                    defaultValue=""
-                                    rules={{ required: "Category is required" }}
-                                    render={({ field }) => (
-                                          <Select onValueChange={field.onChange} value={field.value}>
-                                                <SelectTrigger className="w-full">
-                                                      <SelectValue placeholder="Select a Excelence" />
-                                                </SelectTrigger>
-                                                <SelectContent>
-                                                      <SelectGroup>
-                                                            <SelectItem value="Highly Recomended">Highly Recomended</SelectItem>
-                                                            <SelectItem value="Very Good">Very Good</SelectItem>
-                                                            <SelectItem value="Good">Good</SelectItem>
-                                                            <SelectItem value="Bad">Bad</SelectItem>
-                                                            <SelectItem value="Very Bad">Very Bad</SelectItem>
-                                                            <SelectItem value="Not Recommended">Not Recommended</SelectItem>
-                                                      </SelectGroup>
-                                                </SelectContent>
-                                          </Select>
-                                    )}
-                              />
-                              {/* {errors.category && <p className="text-red-500 text-sm">{(errors.category as FieldError).message}</p>} */}
-
+                              <div className="mt-10 mb-4">
+                                    <Rating style={{ maxWidth: 200, width: "100%" }} value={rating} onChange={setRating} />
+                                    <div>
+                                          <div className="text-sm text-brandTextTertiary">{`Selected: ${getRating(rating)}`}</div>
+                                    </div>
+                              </div>
                               <Textarea {...register("feedBack")} placeholder="Your Custom Feed Back" />
-                              <div className="w-full"><CustomButton btnText="Submit Review" /></div>
+                              <div className="w-full mt-10 flex justify-center items-center"><CustomButton btnText="Submit Review" /></div>
                         </form>
                   </div>
             </div>

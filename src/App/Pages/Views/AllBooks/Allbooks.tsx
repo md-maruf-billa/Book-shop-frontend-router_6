@@ -6,7 +6,8 @@ import { bookCategories } from "@/constant/conastant";
 import { TBook } from "@/Types";
 import { Heart, Search, ShoppingCart } from "lucide-react";
 import { Link } from "react-router";
-import logo from "@/assets/logo.png"
+import Loading from "@/App/Components/Customs/Loading";
+import NoData from "@/App/Components/Customs/NoData";
 
 const AllBooks = () => {
       // Local state for filters
@@ -48,15 +49,12 @@ const AllBooks = () => {
       };
 
       // Fetch books with updated queryParams
-      const { data, isLoading } = useGetAllBooksQuery(queryParams);
-      if (isLoading) return <div className="min-h-screen flex justify-center items-center ">
-            <div className="border p-4 rounded-full">
-                  <img src={logo} />
-            </div>
-      </div>;
+      const { data, isLoading, isFetching } = useGetAllBooksQuery(queryParams);
+      // if (isLoading || isFetching) return <Loading />
 
       // Extract authors
       const authors = data?.data?.data.map((book: TBook) => ({ author: book.author, id: book._id }));
+      const books = data?.data?.data
 
       return (
             <>
@@ -151,32 +149,37 @@ const AllBooks = () => {
                   </div>
 
                   {/* Books Display */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
-                        {data?.data?.data.map((book: TBook) => (
-                              <div key={book._id} className="border rounded-md py-4">
-                                    <div>
-                                          <div className="relative flex items-center justify-center">
-                                                <img src={book.bookImage} className="shadow-md" alt={book.title} />
-                                                {!book.inStock && <span className="absolute top-0 left-4 p-2 bg-brandSelect text-white rounded-sm">Out of Stock</span>}
-                                          </div>
-                                          <div className="text-center space-y-1 mt-4">
-                                                <h2 className="text-brandTextPrimary font-semibold text-xl">{book.title}</h2>
-                                                <p className="text-[#8F8F8F] text-sm">Writer: {book.author}</p>
-                                                <p className="text-brandSelect font-semibold text-xl">$ {book.price}</p>
-                                          </div>
+                  {
+                        isLoading || isFetching ? <Loading /> : books?.length == 0 ? <NoData /> :
 
-                                          {/* Button Group */}
-                                          <div className="flex items-center justify-between px-4 py-2 mt-2">
-                                                <button title="Bookmark" className="border p-2 rounded-full hover:bg-brandSelect hover:text-white transition-colors duration-500"><Heart /></button>
-                                                <Link to={`/book-details/${book._id}`}>
-                                                      <button className="border px-8 py-2 rounded-full hover:bg-brandSelect hover:text-white transition-colors duration-500">Details</button>
-                                                </Link>
-                                                <button title="Add to Cart" className="border p-2 rounded-full hover:bg-brandSelect hover:text-white transition-colors duration-500"><ShoppingCart /></button>
+
+                              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
+                                    {books.map((book: TBook) => (
+                                          <div key={book._id} className="border rounded-md py-4">
+                                                <div>
+                                                      <div className="relative flex items-center justify-center">
+                                                            <img src={book.bookImage} className="shadow-md" alt={book.title} />
+                                                            {!book.inStock && <span className="absolute top-0 left-4 p-2 bg-brandSelect text-white rounded-sm">Out of Stock</span>}
+                                                      </div>
+                                                      <div className="text-center space-y-1 mt-4">
+                                                            <h2 className="text-brandTextPrimary font-semibold text-xl">{book.title}</h2>
+                                                            <p className="text-[#8F8F8F] text-sm">Writer: {book.author}</p>
+                                                            <p className="text-brandSelect font-semibold text-xl">$ {book.price}</p>
+                                                      </div>
+
+                                                      {/* Button Group */}
+                                                      <div className="flex items-center justify-between px-4 py-2 mt-2">
+                                                            <button title="Bookmark" className="border p-2 rounded-full hover:bg-brandSelect hover:text-white transition-colors duration-500"><Heart /></button>
+                                                            <Link to={`/book-details/${book._id}`}>
+                                                                  <button className="border px-8 py-2 rounded-full hover:bg-brandSelect hover:text-white transition-colors duration-500">Details</button>
+                                                            </Link>
+                                                            <button title="Add to Cart" className="border p-2 rounded-full hover:bg-brandSelect hover:text-white transition-colors duration-500"><ShoppingCart /></button>
+                                                      </div>
+                                                </div>
                                           </div>
-                                    </div>
+                                    ))}
                               </div>
-                        ))}
-                  </div>
+                  }
             </>
       );
 };
